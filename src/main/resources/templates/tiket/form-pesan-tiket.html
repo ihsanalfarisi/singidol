@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Beli Tiket</title>
+  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+  <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar('Tiket')"></nav>
+<div class="container">
+  <div class="card m-4 p-4">
+    <div class="card-body">
+      <div class="justify-content-center">
+        <h2>Beli Tiket</h2>
+        <br>
+        <form th:action="@{/tiket/pesan}" th:object="${tiket}" method="POST">
+
+          <th>Konser</th>
+            <tbody>
+            <td>
+              <select name="idKonser" th:field="*{konser.idKonser}" class="form-control">
+                <div th:each="konser: ${listKonser}">
+                  <option th:value="${konser.idKonser}" th:text="${konser.namaKonser}"></option>
+                </div>
+              </select>
+            </td>
+            </tbody>
+          <br><br>
+
+          Nama Pemesanan: <br>
+          <input class="form-control" type="text" th:field="*{namaLengkap}"/>
+          <br><br>
+
+          Tanggal Lahir: <br>
+          <input class="form-control" type="datetime-local" th:field="*{tanggalLahir}"/>
+          <br><br>
+
+          Email: <br>
+          <input class="form-control" type="text" th:field="*{email}" />
+          <br><br>
+
+          <table class="table">
+            <th>Tipe Tiket</th>
+            <tbody>
+            <td>
+              <select name="id" th:field="*{tipe.idTipe}" class="form-control">
+                <div th:each="tipe : ${listTipe}">
+                  <option th:value="${tipe.idTipe}" th:text="${tipe.nama}"></option>
+                </div>
+              </select>
+            </td>
+            </tbody>
+          </table>
+
+          <button class="btn btn-primary" type="submit">Simpan</button>
+          <a class="btn btn-secondary" th:href="@{/konser}">Batal</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>

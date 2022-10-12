@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Singidol</title>
+  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+  <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar('Bonus')"></nav>
+<div class="container">
+  <div class="card m-4 p-4">
+    <div class="card-body">
+      <div class="justify-content-center">
+        <h2>Detail Konser</h2>
+        <br>
+        <p th:text="'Nama Konser: ' + ${konser.namaKonser}"></p>
+        <p th:text="'Waktu: ' + ${konser.waktu}"></p>
+        <p th:text="'Tempat: ' + ${konser.tempat}"></p>
+        <p th:text="'Pendapatan: ' + ${konser.totalPendapatan}"></p>
+        <br>
+        <a class="btn btn-primary" th:href="@{/konser/ubah/} + ${konser.idKonser}">Ubah Konser</a>
+        <hr>
+        <br>
+        <div th:if="*{konser.listTampil.size() != 0}">
+          <h3>Jadwal Tampil Idol</h3>
+          <br>
+          <table class="table">
+            <thead>
+            <tr>
+              <th>Jam</th>
+              <th>Idol</th>
+              <th>Detail</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="penampilanKonser, iterationStatus : ${konser.listTampil}"
+                th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+              <td th:text="${penampilanKonser.jamMulaiTampil}"></td>
+              <td th:text="${penampilanKonser.idol.getNamaIdol()}"></td>
+              <td>
+                <a class="btn btn-info" th:href="@{/idol/} + ${penampilanKonser.idol.getIdIdol()}">Detail</a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div th:unless="*{konser.listTampil.size() != 0}">
+          <h3 th:text="'Tidak ada Penampilan'"></h3>
+        </div>
+        <br>
+        <a class="btn btn-primary" href="/konser">Kembali</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

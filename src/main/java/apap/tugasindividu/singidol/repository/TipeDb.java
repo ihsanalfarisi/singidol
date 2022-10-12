@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface TipeDb extends JpaRepository<TipeModel, String>{
+public interface TipeDb extends JpaRepository<TipeModel, Long>{
     Optional<TipeModel> findByidTipe(Long idIdol);
 
     @Query("SELECT c FROM TipeModel c WHERE c.idTipe = :idTipe")

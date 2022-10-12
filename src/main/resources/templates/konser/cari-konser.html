@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Form Cari Konser</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar('Konser')"></nav>
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2>Cari Konser</h2>
+                <br>
+                <form th:action="@{/carikonser/}" method="GET">
+
+                    Pendapatan Minimal : <br>
+                    <input required class="form-control" type="Number" name="minimalPendapatan"/>
+                    <br><br>
+
+                    Idol : <br>
+                    <select name="idIdol" class="form-control">
+                        <div th:each="idolEx, iterationStatus2 : ${listIdolExisting} ">
+                            <option th:value="${idolEx.idIdol}" th:text="${idolEx.namaIdol} "></option>
+                        </div>
+                    </select>
+                    <br><br>
+
+                    <button class="btn btn-primary" type="submit" name="search">Cari</button>
+                    <a class="btn btn-secondary" th:href="@{/konser}">Batal</a>
+                </form>
+            </div>
+            <br> <hr>
+            <div th:if="${listCari.size() != 0}">
+                <h3>Hasil Cari</h3>
+                <br>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Konser</th>
+                        <th>Pendapatan</th>
+                        <th>Detail Konser</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="konser, iterationStatus : ${listCari}"
+                        th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+                        <td th:text="${iterationStatus.count}"></td>
+                        <td th:text="${konser.namaKonser}"></td>
+                        <td th:text="${konser.totalPendapatan}"></td>
+                        <td>
+                            <a class="btn btn-info" th:href="@{/konser/} + ${konser.idKonser}">Detail</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:unless="${listCari.size() != 0}">
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

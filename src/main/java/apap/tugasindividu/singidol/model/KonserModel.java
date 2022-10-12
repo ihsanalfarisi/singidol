@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -28,21 +29,22 @@ public class KonserModel {
     private String namaKonser;
 
     @NotNull
+    @ColumnDefault("0")
     @Column(name = "total_pendapatan", nullable = false)
     private Long totalPendapatan;
 
     @NotNull
-    @Column(name = "tempat_konser", nullable = false)
-    private String tempatKonser;
+    @Column(name = "tempat", nullable = false)
+    private String tempat;
 
     @NotNull
     @Column(name = "waktu", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    private LocalDateTime waktuKonser;
+    private LocalDateTime waktu;
 
     @OneToMany(mappedBy = "konser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<TiketModel> listTiket;
 
     @OneToMany(mappedBy = "konser", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private List<PenampilanKonserModel> listIdolKonser;
+    private List<PenampilanKonserModel> listTampil;
 }

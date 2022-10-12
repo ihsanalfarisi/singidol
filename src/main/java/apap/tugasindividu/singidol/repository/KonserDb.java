@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface KonserDb extends JpaRepository<KonserModel, String>{
+public interface KonserDb extends JpaRepository<KonserModel, Long>{
     Optional<KonserModel> findByIdKonser(Long idIdol);
 
     @Query("SELECT c FROM KonserModel c WHERE c.idKonser = :idKonser")

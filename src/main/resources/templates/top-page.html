@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Beranda</title>
+  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+  <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('Bonus')"></nav>
+<div class="d-flex justify-content-center">
+  <div class="m-5">
+      <h2>TOP KONSER</h2>
+      <h4 style="text-align: center">Pilih Tipe Tiket</h4>
+  </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <a th:href="@{/bonus/konser/top/vip}" class="mx-2 btn btn-primary">VIP</a>
+      <a th:href="@{/bonus/konser/top/platinum}" class="mx-2 btn btn-primary">PLATINUM</a>
+      <a th:href="@{/bonus/konser/top/gold}" class="mx-2 btn btn-primary">GOLD</a>
+      <a th:href="@{/bonus/konser/top/silver}" class="mx-2 btn btn-primary">SILVER</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

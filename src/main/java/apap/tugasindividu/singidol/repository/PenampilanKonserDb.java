@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface PenampilanKonserDb extends JpaRepository<PenampilanKonserModel, String>{
+public interface PenampilanKonserDb extends JpaRepository<PenampilanKonserModel, Long>{
     Optional<PenampilanKonserModel> findByidPenampilanKonser(Long idIdol);
 
     @Query("SELECT c FROM PenampilanKonserModel c WHERE c.idPenampilanKonser = :idPenampilanKonser")
