@@ -34,8 +34,6 @@ public class TipeModel {
     @Column(name = "deskripsi_tipe", nullable = false)
     private String deskripsiTipe;
 
-
-    //Relasi m
     @OneToMany(mappedBy = "tipe", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<TiketModel> listTipeTiket;
 }

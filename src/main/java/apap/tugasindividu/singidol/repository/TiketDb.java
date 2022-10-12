@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface TiketDb extends JpaRepository<TiketModel, String>{
+public interface TiketDb extends JpaRepository<TiketModel, Long>{
     Optional<TiketModel> findByidTiket(Long idIdol);
 
     @Query("SELECT c FROM TiketModel c WHERE c.idTiket = :idTiket")

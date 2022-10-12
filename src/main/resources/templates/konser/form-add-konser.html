@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Form Tambah Konser</title>
+  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+  <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar('Konser')"></nav>
+<div class="container">
+  <div class="card m-4 p-4">
+    <div class="card-body">
+      <div class="justify-content-center">
+        <h2>Tambah Konser</h2>
+        <br>
+        <form th:action="@{/konser/tambah}" th:object="${konser}" method="POST">
+
+          Nama Konser : <br>
+          <input required class="form-control" type="text" th:field="*{namaKonser}" />
+          <br><br>
+
+          Waktu : <br>
+          <input class="form-control" type="datetime-local" th:field="*{waktu}" />
+          <br><br>
+
+          Tempat : <br>
+          <input class="form-control" type="text" th:field="*{tempat}" />
+          <br>
+          <hr>
+
+          <table class="table">
+            <thead>
+            <th>Daftar Idol</th>
+            <th>
+              <button class="btn btn-primary" type="submit" name="addRow">Tambah Row</button>
+            </th>
+            </thead>
+            <tbody>
+
+            <tr th:each="penampilankonser, iterationStatus : *{listTampil}">
+              <td>
+                <select name="idIdol"th:field="*{listTampil[__${iterationStatus.index}__].idol}"
+                        class="form-control">
+                  <div th:each="idolEx, iterationStatus2 : ${listIdolExisting} ">
+                    <option th:value="${idolEx.idIdol}" th:text="${idolEx.namaIdol} "></option>
+                  </div>
+                </select>
+
+              </td>
+              <td>
+                <input required class="form-control" type="time" th:field="*{listTampil[__${iterationStatus.index}__].jamMulaiTampil}" />
+                <br><br>
+              </td>
+              <td>
+                <button th:value="${iterationStatus.index}"  class="btn btn-danger" type="submit"
+                        name="deleteRow">Hapus</button>
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+
+          <button class="btn btn-primary" type="submit">Simpan</button>
+          <a class="btn btn-secondary" th:href="@{/konser}">Batal</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>

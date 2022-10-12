@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -18,23 +19,20 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "tiket")
 public class TiketModel {
+
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_tiket", nullable = false)
     private Long idTiket;
 
     @NotNull
     @Column(name = "nomor_tiket", nullable = false)
-    private Long nomorTiket;
+    private String nomorTiket;
 
     @NotNull
     @Column(name = "tanggal_pembelian", nullable = false)
-    private String tanggalPembelian;
-
-    @NotNull
-    @Column(name = "asal_negara", nullable = false)
-    private String asalNegara;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime tanggalPembelian;
 
     @NotNull
     @Column(name = "nama_lengkap", nullable = false)
@@ -42,6 +40,7 @@ public class TiketModel {
 
     @NotNull
     @Column(name = "tanggal_lahir", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime tanggalLahir;
 
     @NotNull

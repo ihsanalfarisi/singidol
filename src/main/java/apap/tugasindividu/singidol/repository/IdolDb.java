@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface IdolDb extends JpaRepository<IdolModel, String>{
-    Optional<IdolModel> findByidIdol(Long idIdol);
+public interface IdolDb extends JpaRepository<IdolModel, Long>{
+    Optional<IdolModel> findByIdIdol(Long idIdol);
 
     @Query("SELECT c FROM IdolModel c WHERE c.idIdol = :idIdol")
     Optional<IdolModel> findByidIdolUsingQuery(@Param("idIdol") Long idIdol);
